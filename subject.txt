@@ -1,0 +1,4 @@
+IT1111	Nhập môn công nghệ thông tin
+IT1112	Lập trình mạng
+IT1113	Tiếng Nhật chuyên ngành
+
