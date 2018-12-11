@@ -107,6 +107,7 @@ void getIdAndPassword(GtkWidget *widget, gpointer *gp){
 void logout(GtkWidget *widget, gpointer *gp){
      gtk_widget_hide(viewTranscript);
      gtk_entry_set_text(password_input,"");
+     gtk_entry_set_text(codeInput, "");
      showFormLogin();
 }
 
@@ -129,6 +130,9 @@ void initWidget(){
     codeInput = GTK_WIDGET(gtk_builder_get_object(builder, "text_search"));
     searchButton = GTK_WIDGET(gtk_builder_get_object(builder, "button_search"));
 
+    table = gtk_table_new (10, 5, TRUE);
+
+    gtk_container_add (GTK_CONTAINER (box2), table);
 
     g_signal_connect(searchButton, "clicked", G_CALLBACK(getAllSubject), NULL);
     g_signal_connect(codeInput, "activate", G_CALLBACK(onSearch), NULL);
@@ -198,9 +202,6 @@ void showMarktable(){
 }
 void showTranscript(){
 
-    table = gtk_table_new (10, 5, TRUE);
-
-    gtk_container_add (GTK_CONTAINER (box2), table);
 
     GtkWidget *idSubject,*nameSubject,*pointMid,*pointFinal,*point;
     idSubject = leftLabel ("Mã môn học");
