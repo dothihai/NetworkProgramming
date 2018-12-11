@@ -19,7 +19,7 @@
               <object class="GtkLabel" id="info_user">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Nguyễn Ngọc Trung(20153979)</property>
+                <property name="label" translatable="yes">ok</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -97,7 +97,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_search">
-                <property name="label" translatable="yes">Tìm kiếm</property>
+                <property name="label" translatable="yes">Tất cả</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

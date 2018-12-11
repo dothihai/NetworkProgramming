@@ -33,6 +33,7 @@ int checkLogin(Account acc){
 		if(strcmp(acc.mssv,account[i].mssv)==0&&strcmp(acc.password,account[i].password)==0){
 			strcpy(accountLogin.mssv,acc.mssv);
 			strcpy(accountLogin.name,account[i].name);
+			puts(account[i].name);
 			return 1;
 		}
 	}

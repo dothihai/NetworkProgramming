@@ -31,7 +31,7 @@ int main( int   argc,
     GtkWidget *window;
     GtkWidget *table;
 
-   
+   gtk_init (&argc, &argv);
 
     /* Create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);

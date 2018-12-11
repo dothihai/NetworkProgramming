@@ -1,27 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
-#include "account.c"
-#define MAXLINE 4096 /*max text line length*/
+#include "transcript.c"
+#define MAXLINE 40960 /*max text line length*/
 #define SERV_PORT 40000 /*port*/
 #define LISTENQ 8 /*maximum number of client connections */
-#define SEND_USER_ACTION 'u'
-#define SEND_PASSWORD_ACTION 'p'
-#define LOGIN_RESPONSE_ACTION 'r'
 
-#define SUCCESS "success"
-#define FAILED "failed"
-#define OK "OK"
+#include "string-constant.h"
+
 
 void clear(char * s){
   memset(s, 0, strlen(s));
 }
+
+
 int main (int argc, char **argv)
 {
-  char response[1000];
+  char * response = (char*) calloc(0, MAXLINE * sizeof(Transcript));
   int responseLength;
  int listenfd, connfd, n;
  pid_t childpid;
@@ -29,6 +28,11 @@ int main (int argc, char **argv)
  char buf[MAXLINE];
  struct sockaddr_in cliaddr, servaddr;
 	
+
+readFileTranscript("transcript.txt");
+readFileSubject("subject.txt");
+
+
  //creation of the socket
  listenfd = socket (AF_INET, SOCK_STREAM, 0);
  //read file contain time table
@@ -46,8 +50,7 @@ int main (int argc, char **argv)
  readFileAccount("account.txt");
 	
  for ( ; ; ) {
-
-		
+	
   clilen = sizeof(cliaddr);
   connfd = accept (listenfd, (struct sockaddr *) &cliaddr, &clilen);
   if(fork()==0){
@@ -79,7 +82,33 @@ int main (int argc, char **argv)
       send(connfd, response, responseLength, 0);
     }
     break;
-
+    case SEND_USERNAME_ACTION:{
+      clear(response);
+      sprintf(response, "%c_%s", SEND_USERNAME_ACTION, accountLogin.name);
+      responseLength = strlen(response);
+      send(connfd, response, responseLength, 0);
+    }
+    break;
+    case GET_SUBJECT:{
+        if (strcmp(buf, GET_ALL_SUBJECT_MARK_TABLE) == 0)
+        {
+          clear(response);
+          char temp[MAXLINE];
+          sprintf(temp, "%c_", SEND_ALL);
+          getTableSubjectOfStudent(acc.mssv,NULL, temp+2);
+          printf("%s\n", "getAllSubject");
+          send(connfd, temp, strlen(temp), 0);
+        }else {
+          char * id_subject = buf+5;
+          clear(response);
+          char temp[MAXLINE];
+          sprintf(temp, "%c_", SEND_SUBJECT);
+          getTableSubjectOfStudent(acc.mssv,id_subject, temp+2);
+          printf("%s-%s\n", "get", id_subject);
+          send(connfd, temp, strlen(temp), 0);
+        }
+    }
+    break;
    }
   }
 			

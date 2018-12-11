@@ -27,11 +27,12 @@
 #define SEND_USER_ACTION 'u'
 #define SEND_PASSWORD_ACTION 'p'
 #define LOGIN_RESPONSE_ACTION 'r'
-#define GET_LIST_USER_ACTION 'L'
-#define PRIVATE_MESSAGE_ACTION 'M'
-#define CHANNEL_MESSAGE_ACTION 'C'
-#define LOGOUT_ACTION 'O'
-
+#define SEND_USERNAME_ACTION 'n'
+#define GET_SUBJECT_MARK_TABLE "f_id_"
+#define GET_ALL_SUBJECT_MARK_TABLE "f_list"
+#define GET_SUBJECT 'f'
+#define SEND_SUBJECT 'i'
+#define SEND_ALL 's'
 #define SUCCESS "success"
 #define FAILED "failed"
 #define OK "OK"
