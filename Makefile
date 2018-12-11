@@ -2,7 +2,7 @@ all:
 	gcc main.c -o main -g `pkg-config --cflags --libs gtk+-3.0`
 w: 	
 	gcc main.c -o main -w -g `pkg-config --cflags --libs gtk+-3.0`	
-run: all
+run: w
 	./main
 clean: 
 	rm main
