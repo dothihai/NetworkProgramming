@@ -145,6 +145,11 @@ void showFormLogin(){
     
 }
 
+GtkWidget * leftLabel(char*s){
+    GtkWidget * xl = gtk_label_new(s);
+    gtk_misc_set_alignment(GTK_MISC(xl), 0, 0.5);
+    return xl;
+}
 void showMarktable(){    
     int i = 0;
     for (i = 0; i < 20; ++i)
@@ -158,23 +163,24 @@ void showMarktable(){
             
                 label[i][0] = gtk_label_new (transcript[i].id_subject);
                 char subject_name[100];
-                label[i][1] = gtk_label_new (getNameSubject(subject_name, transcript[i].id_subject));
+                label[i][1] = leftLabel (getNameSubject(subject_name, transcript[i].id_subject));
+                // gtk_misc_set_alignment(GTK_MISC(label[i][1]), 0, 0.5);
                 char gk[10];
                 sprintf(gk,"%.2f", transcript[i].giua_ki);
-                label[i][2] = gtk_label_new (gk);
+                label[i][2] = leftLabel (gk);
                 char ck[10];
                 sprintf(ck,"%.2f", transcript[i].cuoi_ki);
-                label[i][3] = gtk_label_new (ck);
-                label[i][4] = gtk_label_new (transcript[i].diem_chu);
+                label[i][3] = leftLabel (ck);
+                label[i][4] = leftLabel (transcript[i].diem_chu);
     }
 
    for (i = 0; i < count; ++i){
-            gtk_label_set_justify(GTK_LABEL(label[i][1]), GTK_JUSTIFY_LEFT);
-            gtk_table_attach (GTK_TABLE (table), label[i][0], 0,1,i+2,i+3,30,30,30,30);
-            gtk_table_attach (GTK_TABLE (table), label[i][1], 1,2,i+2,i+3,30,GTK_SHRINK,30,30);
-            gtk_table_attach (GTK_TABLE (table), label[i][2], 2,3,i+2,i+3,30,30,30,30);
-            gtk_table_attach (GTK_TABLE (table), label[i][3], 3,4,i+2,i+3,30,30,30,30);
-            gtk_table_attach (GTK_TABLE (table), label[i][4], 4,5,i+2,i+3,30,30,30,30);
+            // gtk_label_set_justify(GTK_LABEL(label[i][1]), GTK_JUSTIFY_LEFT);
+            gtk_table_attach (GTK_TABLE (table), label[i][0], 0,1,i+2,i+3,20,20,20,20);
+            gtk_table_attach (GTK_TABLE (table), label[i][1], 1,2,i+2,i+3,20,30,20,20);
+            gtk_table_attach (GTK_TABLE (table), label[i][2], 2,3,i+2,i+3,20,20,20,20);
+            gtk_table_attach (GTK_TABLE (table), label[i][3], 3,4,i+2,i+3,20,20,20,20);
+            gtk_table_attach (GTK_TABLE (table), label[i][4], 4,5,i+2,i+3,20,20,20,20);
             gtk_widget_show (label[i][0]);
             gtk_widget_show (label[i][1]);
             gtk_widget_show (label[i][2]);
@@ -197,16 +203,16 @@ void showTranscript(){
     gtk_container_add (GTK_CONTAINER (box2), table);
 
     GtkWidget *idSubject,*nameSubject,*pointMid,*pointFinal,*point;
-    idSubject = gtk_label_new ("Mã môn học");
-    nameSubject = gtk_label_new ("Tên môn học");
-    pointMid = gtk_label_new ("Điểm giữa kỳ");
-    pointFinal = gtk_label_new ("Điểm cuối kỳ");
-    point = gtk_label_new ("Điểm chữ");
-    gtk_table_attach(GTK_TABLE (table), idSubject, 0,1,1,2,0,30,10,10);
-    gtk_table_attach(GTK_TABLE (table), nameSubject, 1,2,1,2,30,30,30,30);
-    gtk_table_attach(GTK_TABLE (table), pointMid, 2,3,1,2,30,30,30,30);
-    gtk_table_attach(GTK_TABLE (table), pointFinal, 3,4,1,2,30,30,30,30);
-    gtk_table_attach(GTK_TABLE (table), point, 4,5,1,2,30,30,30,30);
+    idSubject = leftLabel ("Mã môn học");
+    nameSubject = leftLabel ("Tên môn học");
+    pointMid = leftLabel ("Điểm giữa kỳ");
+    pointFinal = leftLabel ("Điểm cuối kỳ");
+    point = leftLabel ("Điểm chữ");
+    gtk_table_attach(GTK_TABLE (table), idSubject, 0,1,1,2,0,20,10,10);
+    gtk_table_attach(GTK_TABLE (table), nameSubject, 1,2,1,2,30,20,20,20);
+    gtk_table_attach(GTK_TABLE (table), pointMid, 2,3,1,2,20,20,20,20);
+    gtk_table_attach(GTK_TABLE (table), pointFinal, 3,4,1,2,20,20,20,20);
+    gtk_table_attach(GTK_TABLE (table), point, 4,5,1,2,20,20,20,20);
     gtk_widget_show (idSubject);
     gtk_widget_show (nameSubject);
     gtk_widget_show (pointMid);
